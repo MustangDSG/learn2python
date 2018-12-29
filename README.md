@@ -1,4 +1,3 @@
 # learn2python
-Жалкие попытки в путон.
 
-Я не знаю как это работает, но тут будут всякие проги на пайтоне3. 
+Small programs for learning purpose.
