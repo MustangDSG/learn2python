@@ -1,21 +1,22 @@
 #BME280 v1.2
 #Циклический сбор данных с датчика BME280 в списки и вывод среднего значения.
 #Блок импорта
-import smbus2
-import bme280
+#import smbus2
+#import bme280
+
 import os
 import time
-
+import random
 
 #Самое начало
-os.system('clear')
+os.system('cls' if os.name == 'nt' else 'clear')
 
 #Подрубаем датчик
-port = 1
-address = 0x76
-bus = smbus2.SMBus(port)
+#port = 1
+#address = 0x76
+#bus = smbus2.SMBus(port)
 
-calibration_params = bme280.load_calibration_params(bus, address)
+#calibration_params = bme280.load_calibration_params(bus, address)
 
 #Считывание показаний (перенесено в основной цикл, иначе не будем получать новые значения)
 #data = bme280.sample(bus, address, calibration_params)
@@ -35,31 +36,39 @@ def midval (ldata, razm):
     for i in ldata:
         summ = summ + i
     summ = summ/razm
+    # return summ / razm
     return summ
-    
+
 #Списки и переменные
 ltemp = []
 lpres = []
 lhumi = []
-lrazm = 10                  #размер списка
-sleeptime = 5               #период обновления
+lrazm = 3                   #размер списка
+sleeptime = 1               #период обновления
+programCounter = 5
 
 #Основной цикл
-while True:
-    data = bme280.sample(bus, address, calibration_params)
-    if len(ltemp) < lrazm:
-        createlist(ltemp, data.temperature)
-        createlist(lpres, data.pressure)
-        createlist(lhumi, data.humidity)
+while programCounter > 0 :
+    # data = bme280.sample(bus, address, calibration_params)
+    temperature = random.randint(0, 5)
+    ltemp.append(random.randint(0,5))
+    lpres.append(random.randint(0, 3))
+    lhumi.append(random.randint(0, 7))
+    print('List of temperatures ', ltemp)
+    print('List of pressures ', lpres)
+    print('List of humidity ', lhumi)
+    if len(ltemp) == lrazm:
+        print ('''Показания BME280 на ''', programCounter)
+        print ('''\tТемпература =''', midval(ltemp, lrazm))
+        print ('''\tДавление (гПа) =''', midval(lpres, lrazm))
+        print ('''\tОтносительная влажность =''', midval(lhumi, lrazm))
+        ltemp.pop(0)
+        lpres.pop(0)
+        lhumi.pop(0)
     else:
-        updatelist(ltemp, data.temperature)
-        updatelist(lpres, data.pressure)
-        updatelist(lhumi, data.humidity)
-        print ('''Показания BME280 на''', data.timestamp)
-        print ('''Температура =''', midval(ltemp, lrazm))
-        print ('''Давление (гПа) =''', midval(lpres, lrazm))
-        print ('''Относительная влажность =''', midval(lhumi, lrazm))
-        time.sleep(sleeptime)
-        os.system('clear')
-# конец
+        print('Not enough data.')
+    time.sleep(sleeptime)
+    programCounter -= 1
+    # os.system('clear')
 
+# конец
