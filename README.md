@@ -1,3 +1,4 @@
 # learn2python
 
-Small programs for learning purpose.
+/ - uncategorized programs.
+/tests/ - small programs for learning purpose.
