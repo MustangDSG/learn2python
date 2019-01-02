@@ -15,6 +15,20 @@ def season (month):
 	else:
 		print("Недопустимое значение") #А почему бы и да?
 
+def season_alt(month) :
+	if month not in range(1, 13) :
+		print('Month not correct, must be 1..12.')
+		return
+	seasons = ('Winter', 'Spring', 'Summer', 'Fall' )
+	monthsInYear = 12; monthsInSeason = 3
+	return seasons[(month % monthsInYear) // monthsInSeason]
+
+for month in range(0, 13):
+	print('Month %d is %s season.' % (month, season_alt(month)))
+
+
+'''
 ask=input("Введите номер месяца: ")
 ask=int(ask)
 season(ask)
+'''

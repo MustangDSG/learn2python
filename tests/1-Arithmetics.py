@@ -17,11 +17,14 @@ def arithmetic (num1, num2, deis):
 	else:
 		print("Неизвестная операция.")
 		pass
-	
 
+
+num1 = 3; num2 = 2; deis = 'k'
+	
+'''
 num1 = input("Введите первое число: ")
 num2 = input("Введите второе число: ")
 deis = input("Какое действие необходимо совершить?")
-
-arithmetic(num1, num2, deis)
+'''
+arithmetic(3, 2, '+')
 
