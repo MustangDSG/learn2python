@@ -1,5 +1,6 @@
 #чтение текстового файла base.txt и создание на его основе
 #json-файла, содержащего массив уникальных слов
+#либо из строки, если файл отсутствует
 
 #блок импорта
 import re
@@ -40,17 +41,17 @@ def write_to_json(uni_list):
 
 #основной блок
 try:
-    file = open('base.txt','r')		#проверка существования файла
-except IOError as exc:				#работа со строкой, если файл base.txt не существует
+    file = open('base.txt','r')			#проверка существования файла
+except IOError as exc:					#работа со строкой, если файл base.txt не существует
     ask=('''This is an example string for case when base file does not exist.
-    		This program have to make a JSON file using text you are reading now.
+    		This program should make a JSON file using the text you are reading now.
     		I hope i didn't make any mistakes because my English isn't perfect.
     	''')
     read_from_string(ask)
     make_uniqe_list(raw_list)
     write_to_json(uni_list)
 else:
-    with file:						#работа с файлом, если файл base.txt существует
+    with file:							#работа с файлом, если файл base.txt существует
         read_from_file(file)
         make_uniqe_list(raw_list)
         write_to_json(uni_list)
