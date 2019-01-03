@@ -35,7 +35,7 @@ def write_to_json(uni_list):
 	new_file=open('list.json','w')
 	new_file.write('[\n')
 	for i in uni_list:
-		new_file.write('\t'+i+','+'\n')
+		new_file.write('\t'+'"'+i+'"'+','+'\n')
 	new_file.write(']')
 	new_file.close()
 
