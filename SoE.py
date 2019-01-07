@@ -2,7 +2,7 @@
 #Решето Эратосфена
 
 #предел работы скрипта
-limit=1000+1
+limit=16; it = 0
 
 #будем считать, что каждый индекс списка является простым числом
 numbers_list=[True]*limit
@@ -14,6 +14,7 @@ numbers_list[1]=False
 for number in range(2, limit):
 	if numbers_list[number]:
 		for i in range(2*number, limit, number):
+			it += 1
 			numbers_list[i]=False
 
 #создаем список только из простых чисел
@@ -22,5 +23,23 @@ for number in range(limit):
 	if numbers_list[number]:
 		prime_numbers.append(number)
 
-print(prime_numbers)
+print("Prime numbers to", limit, ":", prime_numbers)
+print("Iterations:", it)
 
+limit = 16; it = 0
+nums = list(range(0, limit + 1))
+print("\nSource list all numbers:", nums)
+i = 2
+while i * i <= limit:
+	if nums[i] != 0:
+		j = i * i
+		while j <= limit:
+			it += 1
+			nums[j] = 0
+			j += i
+	i += 1
+nums.remove(1)
+while 0 in nums:
+	nums.remove(0)
+print("Prime numbers to", limit, ":", nums)
+print("Iterations:", it)
