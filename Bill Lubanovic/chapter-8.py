@@ -1,9 +1,10 @@
- #Bill Lubanovic - Introducing Python chapter 8 tasks.
+#Bill Lubanovic - Introducing Python chapter 8 tasks.
+
+# Вещание 8-1. Практическая часть по работе с файлами.
 
 divider="-------------------------------------------------------------"
 print("Вывод результатов упражнений к 8 главе.")
 print(divider)
-
 
 # Задание 1.
 # Присвойте строку 'This is a test of the emergency text system' переменной test1
@@ -17,6 +18,7 @@ test_file.close()
 # Задание 2.
 # Откройте файл test.txt и считайте его содержимое в строку test2. Совпадают
 # ли строки test1 и test2?
+
 with open('test.txt', 'rt') as test_file2:
 	lines = test_file2.readlines()
 print(lines)
@@ -34,7 +36,7 @@ import csv
 
 books_dict = [
 			{'author' : 'JRR Tolkien', 'book' : 'The Hobbit'},
-			{'author' : 'Lynne Truss', 'book' : 'Shoots & Leaves'},
+			{'author' : 'Lynne Truss', 'book' : 'Eats, Shoots & Leaves'},
 			]
 with open('books.csv', 'wt') as file_output:
 	cout = csv.DictWriter(file_output, ['author', 'book'])
@@ -53,10 +55,6 @@ with open('books.csv', 'rt') as file_input:
 print (books)
 print(divider)
 
-#у меня чтение с помощью DictReader произошло в OrderedDict (Python 3.7.2):
-#[OrderedDict([('author', 'JRR Tolkien'), ('book', 'The Hobbit')]), OrderedDict([('author', 'Lynne Truss'), ('book', 'Shoots & Leaves')])]
-
-
 # Задание 5.
 # Создайте CSV-файл books.csv и запишите его в следующие строки:
 # title,author,year
@@ -71,7 +69,7 @@ books_dict2 = [
 			{'title' : 'Perdido Street Station', 'author' : 'China Miéville', 'year' : '2000'},
 			{'title' : 'Thud!', 'author' : 'Terry Pratchett', 'year' : '2005'},
 			{'title' : 'The Spellman Files', 'author' : 'Lisa Lutz', 'year' : '2007'},
-			{'title' : 'Small Gods', 'author' : 'Terry Pratchett', 'year' : '1992'},			
+			{'title' : 'Small Gods', 'author' : 'Terry Pratchett', 'year' : '1992'},
 			]
 
 with open('books2.csv', 'wt') as file_output:
@@ -79,7 +77,7 @@ with open('books2.csv', 'wt') as file_output:
 	cout.writeheader()
 	cout.writerows(books_dict2)
 
-
+# Вещание 8-2. Работа с БД. Практическая часть.
 
 # Задание 6.
 # Используйте модуль sqlite3, чтобы создать базу данных SQLite books.db и таб­-
@@ -90,13 +88,13 @@ import sqlite3
 
 conn = sqlite3.connect('books.db')
 curs = conn.cursor()
-curs.execute("""DROP TABLE IF EXISTS books""")  #эта строчка нужна, чтоб не удалять каждый раз таблицу вручную, т.к. с первого раза у меня не получается все сделать верно
+curs.execute("""DROP TABLE IF EXISTS books""")  
+#эта строчка нужна, чтоб не удалять каждый раз таблицу вручную, т.к. с первого раза у меня не получается все сделать верно
 curs.execute("""CREATE TABLE IF NOT EXISTS books (
 	title TEXT,
 	author TEXT,
 	year INTEGER
 	) """)
-
 
 # Задание 7.
 # Считайте данные из файла books.csv и добавьте их в таблицу book.
@@ -106,13 +104,14 @@ with open('books2.csv', 'rt') as file_input2:
 	values_to_base = [(i['title'], i['author'], i['year']) for i in cin2]
 
 curs.executemany("INSERT INTO books VALUES (?,?,?)", values_to_base)
-conn.commit()	#В учебнике про вот эту строчку ни слова, а без нее запись в базу не произойдет.
+#В учебнике про следующую строчку ни слова, а без нее запись в базу не произойдет.
+conn.commit()
 
 # Задание 8.
 # Считайте и выведите на экран графу title таблицы book в алфавитном порядке.
 
 print("Вывод данных из таблицы по графе title в алфавитном порядке:")
-curs.execute('SELECT title FROM books ASC')
+curs.execute('SELECT title FROM books ORDER BY title ASC')
 print(curs.fetchall())
 print(divider)
 
@@ -132,7 +131,7 @@ print(divider)
 import sqlalchemy as sa
 
 conn2 = sa.create_engine('sqlite:///books.db')
-titles_from_base = conn2.execute('SELECT title FROM books ASC')
+titles_from_base = conn2.execute('SELECT title FROM books ORDER BY title ASC')
 print("Вывод через просто print покажет объект:", titles_from_base)
 print("Для вывода всех значений нужен итератор:", end=' ')
 for rows in titles_from_base:
@@ -158,8 +157,9 @@ print(divider)
 # Задание 12.
 # Увеличьте поле count хеша test и выведите его на экран.
 
-conn3.hset('test', 'count', '2')
-print("Вывод измененного хэша Redis:", conn3.hget('test', 'count'))
+conn3.mset({"counter": "1", "name": "Fester"})
+conn3.incr("counter")
+print("All values hash Redis:", conn3.mget(["counter", "name"]))
 
 # Примечание:
 # Забавно то, что написано "увеличьте", хотя в учебнике указано только то, что
@@ -170,3 +170,5 @@ print("Вывод измененного хэша Redis:", conn3.hget('test', 'c
 # Финальная часть.
 curs.close()
 conn.close()
+
+
