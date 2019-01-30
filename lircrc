@@ -1,0 +1,102 @@
+begin
+  button = KEY_KP1
+  prog = myprogram
+  config = key1
+end
+
+begin
+  button = KEY_KP2
+  prog = myprogram
+  config = key2
+end
+
+begin
+  button = KEY_KP3
+  prog = myprogram
+  config = key3
+end
+
+begin
+  button = KEY_KP4
+  prog = myprogram
+  config = key4
+end
+
+begin
+  button = KEY_KP5
+  prog = myprogram
+  config = key5
+end
+
+begin
+  button = KEY_KP6
+  prog = myprogram
+  config = key6
+end
+
+begin
+  button = KEY_KP7
+  prog = myprogram
+  config = key7
+end
+
+begin
+  button = KEY_KP8
+  prog = myprogram
+  config = key8
+end
+
+begin
+  button = KEY_KP9
+  prog = myprogram
+  config = key9
+end
+
+begin
+  button = KEY_KP0
+  prog = myprogram
+  config = key0
+end
+
+begin
+  button = KEY_HIRAGANA
+  prog = myprogram
+  config = keystar
+end
+
+begin
+  button = KEY_KATAKANA
+  prog = myprogram
+  config = keydiez
+end
+
+begin
+  button = KEY_UP
+  prog = myprogram
+  config = keyup
+end
+
+begin
+  button = KEY_DOWN
+  prog = myprogram
+  config = keydown
+end
+
+begin
+  button = KEY_LEFT
+  prog = myprogram
+  config = keyleft
+end
+
+begin
+  button = KEY_RIGHT
+  prog = myprogram
+  config = keyright
+end
+
+begin
+  button = KEY_OK
+  prog = myprogram
+  config = keyok
+end
+
