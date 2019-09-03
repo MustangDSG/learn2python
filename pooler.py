@@ -16,13 +16,14 @@ else:
 
 #создание списков
 for i in range(0, step):
-	for j in range(k, k + step):
-		temp_list.append(unpooled[j])
-	print(temp_list)
-	temp_list.clear()
-
-
-# на потом
+        for j in range(step*i, step*i+step):
+                if j > count-1:
+                        break
+                temp_list.append(unpooled[j])
+        print(temp_list)
+        temp_list.clear()
+        
+#на потом
 if mod >= div:
 	for i in range(div+1):
 		pool_dict = {i : "temp_list"}
