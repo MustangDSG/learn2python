@@ -18,7 +18,7 @@ else:
 for i in range(0, step):
         for j in range(step*i, step*i+step):
                 if j > count-1:
-                        continue
+                        break
                 temp_list.append(unpooled[j])
         print(temp_list)
         temp_list.clear()
