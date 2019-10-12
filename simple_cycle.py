@@ -11,8 +11,7 @@ def func():
 		new_id = "new"
 
 		if old_id != new_id:
-			newlist.append(new_id)
-			message = "Новое видео " + new_id
+			message = "Новое видео " + old_id
 		return message
 		print(newlist)
 
