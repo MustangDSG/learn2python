@@ -12,6 +12,7 @@ def func():
 
 		if old_id != new_id:
 			message = "Новое видео " + old_id
-		return message
+		yield message
 
-print(func())
+for i in func():
+	print(i)
