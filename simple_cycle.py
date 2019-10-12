@@ -13,6 +13,5 @@ def func():
 		if old_id != new_id:
 			message = "Новое видео " + old_id
 		return message
-		print(newlist)
 
 print(func())
