@@ -8,6 +8,12 @@ rss_data = feedparser.parse(rss_url)
 #список подстрок, которые должны быть в названии, обязательно все
 check = ['[HorribleSubs]', 'Black Clover']
 
+def checkall(check, new_title):
+	for i in range(len(check)):
+		if not (check[i] in new_title):
+			return False
+	return True
+
 #цикл обработки, 150 - количество записей, которое выдает сайт в своем rss
 for i in range(len(rss_data['entries'])):
 	#берем только названия
@@ -23,8 +29,11 @@ for i in range(len(rss_data['entries'])):
 
 	#if check in new_title:     #вот тут надо сделать проверку, что ВСЕ элементы списка есть в переменной new_title
 	#	print(new_title)
+	
+	if checkall(check, new_title):
+		print(new_title)
 
 	#если вот так захардкодить прям по индексам, то будет нужный результат, но хочется сделать это абстрактно,
 	#на случай, если количество элементов изменится
-	if all([check[0] in new_title, check[1] in new_title]):
-		print(new_title)
+	# if all([check[0] in new_title, check[1] in new_title]):
+	#  	print(new_title)
