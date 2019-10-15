@@ -9,7 +9,7 @@ rss_data = feedparser.parse(rss_url)
 check = ['[HorribleSubs]', 'Black Clover']
 
 #цикл обработки, 150 - количество записей, которое выдает сайт в своем rss
-for i in range(150):
+for i in range(len(rss_data['entries'])):
 	#берем только названия
 	title = rss_data['entries'][i]['title']
 	#разбираем строку на отдельные куски
